@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+
 class Post extends Model
 {
     use HasFactory;
 
     protected $fillable = ['title', 'author_id', 'slug', 'body'];
+
+    protected $with = ['author', 'category'];
 
     public function author(): BelongsTo
     {
