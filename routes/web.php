@@ -4,6 +4,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisterController;
 
 
 Route::get('/', function () {
@@ -40,6 +41,6 @@ Route::get('/contact', function () {
 Route::get('/login', function () {
     return view('login', ['title' => 'Halaman login']);
 });
-Route::get('/register', function () {
-    return view('register', ['title' => 'Halaman Registrasi']);
-});
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+
+Route::post('/register', [RegisterController::class, 'store']);
