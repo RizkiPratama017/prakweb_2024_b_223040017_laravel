@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardPostController;
 
 
 Route::get('/', function () {
@@ -41,7 +42,7 @@ Route::get('/contact', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard', ['title' => 'Halaman Dashboard']);
-})->middleware('auth');
+});
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 
@@ -53,3 +54,5 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::resource('/dashboardpost', DashboardPostController::class)->middleware('auth');
