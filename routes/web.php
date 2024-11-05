@@ -41,7 +41,7 @@ Route::get('/contact', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard', ['title' => 'Halaman Dashboard']);
+    return view('dashboard.index', ['title' => 'Halaman Dashboard']);
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
@@ -55,4 +55,4 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::resource('/dashboardpost', DashboardPostController::class)->middleware('auth');
+Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');

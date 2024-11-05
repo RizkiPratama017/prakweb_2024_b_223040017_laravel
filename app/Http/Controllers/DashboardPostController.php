@@ -12,12 +12,10 @@ class DashboardPostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('author_id', auth()->user()->id)->get();
         // Post::where('user_id', auth()->user()->id)->get();
 
-        return view('dashboardpost', [
-            'title' => 'My Post',
-            'posts' => $posts,
+        return view('dashboard.posts', [
+            'posts' => Post::where('author_id', auth()->user()->id)->get()
         ]);
     }
 
@@ -41,13 +39,12 @@ class DashboardPostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($slug)
+    public function show(Post $post)
     {
-        $post = Post::where('slug', $slug)->firstOrFail(); // Mengambil post berdasarkan slug
+        // $post = Post::where('slug', $slug)->firstOrFail(); // Mengambil post berdasarkan slug
 
-        return view('dashboarddetail', [
+        return view('dashboard.show', [
             'post' => $post,
-            'title' => $post->title // Mengirimkan title untuk layout
         ]);
     }
 
