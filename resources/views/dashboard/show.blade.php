@@ -11,7 +11,7 @@
                             <div>
                                 <p class="text-base text-gray-500 dark:text-gray-400 mb-1">
                                     {{ $post->created_at->diffForHumans() }}</p>
-                                {{-- <a href="/posts?category={{ $post->category->slug }}"> --}}
+
                                 <a href="">
                                     <span
                                         class="bg-{{ $post->category->color }}-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
@@ -25,7 +25,10 @@
                         class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
                         {{ $post->title }}</h1>
                 </header>
-                <p>{{ $post->body }}</p>
+
+                <div class="post-content">
+                    {!! $post->body !!}
+                </div>
 
                 <div class="mt-4 flex space-x-4">
                     <a href="/edit/{{ $post->slug }}" class="flex items-center">

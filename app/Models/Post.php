@@ -12,7 +12,7 @@ class Post extends Model
 {
     use HasFactory, Sluggable;
 
-    protected $fillable = ['title', 'author_id', 'slug', 'body'];
+    protected $fillable = ['title', 'author_id', 'slug', 'body', 'category_id'];
     protected $with = ['author', 'category'];
 
     public function author(): BelongsTo

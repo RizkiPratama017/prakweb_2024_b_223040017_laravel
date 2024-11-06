@@ -58,7 +58,7 @@
                             {{ $post->title }}
                         </h2>
                     </a>
-                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{{ Str::limit($post->body, 150) }}</p>
+                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{!! Str::limit($post->body, 150) !!}</p>
                     <div class="flex justify-between items-center">
                         <a href="/posts?author={{ $post->author->username }}">
                             <div class="flex items-center space-x-3">
@@ -83,10 +83,9 @@
                     </div>
                 </article>
             @empty
-
                 <div>
-                    <p class="font-semibold text-xl my-4">Articel not found!</p>
-                    <a href="/posts" class="block text-blue-600 hovet:underline">&laquo; Back to All posts</a>
+                    <p class="font-semibold text-xl my-4">Article not found!</p>
+                    <a href="/posts" class="block text-blue-600 hover:underline">&laquo; Back to All posts</a>
                 </div>
             @endforelse
         </div>
