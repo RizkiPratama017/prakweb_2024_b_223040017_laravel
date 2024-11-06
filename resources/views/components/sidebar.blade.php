@@ -6,16 +6,18 @@
             <ul class="space-y-4">
                 <li>
                     <a href="/dashboard"
-                        class="{{ Request::is('dashboard') ? 'active' : '' }} flex items-center text-gray-700 hover:text-black font-semibold">
+                        class="{{ Request::is('dashboard') ? 'text-blue-500' : 'text-gray-700' }} flex items-center hover:text-black font-semibold">
                         <i class="bi bi-house mr-2"></i> Dashboard
                     </a>
                 </li>
+
                 <li>
                     <a href="/dashboard/posts"
-                        class="{{ Request::is('dashboard/posts') ? 'active' : '' }}flex items-center text-gray-700 hover:text-black font-semibold">
-                        <i class="bi bi-file-earmark mr-2"></i> My Posts
+                        class="{{ Request::is('dashboard/posts') ? 'text-blue-500' : 'text-gray-700' }} flex items-center hover:text-black font-semibold">
+                        <i class="bi bi-house mr-2"></i> My Post
                     </a>
                 </li>
+
             </ul>
         </nav>
     </div>

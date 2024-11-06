@@ -1,10 +1,15 @@
 <x-dlayout>
     <div class="flex flex-col md:flex-row justify-between items-center border-b border-gray-300 py-4 mb-4">
-        <h1 class="text-2xl font-bold">Welcome Back, {{ auth()->user()->name }}</h1>
+        <h2 class="mb-5 text-2xl font-bold">My Post</h2>
     </div>
 
     <div class="overflow-x-auto">
-        <table class="min-w-full text-sm border border-gray-200">
+        <a href="/dashboard/posts/create"
+            class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-1 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            <i class="bi bi-plus-circle-fill mr-2"></i> Create New Post
+        </a>
+
+        <table class="mt-3 min-w-full text-sm border border-gray-200">
             <thead class="bg-gray-100">
                 <tr>
                     <th class="border-b border-gray-300 px-4 py-2 text-left">#</th>
