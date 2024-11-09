@@ -60,19 +60,25 @@
                                         d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
                                 </svg>
                             </a>
-                            <a href="/edit" class="text-gray-800 dark:text-white">
+                            <a href="/dashboard/posts/{{ $post->slug }}/edit" class="text-gray-800 dark:text-white">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z">
                                     </path>
                                 </svg>
                             </a>
-                            <a href="/hapus" class="text-gray-800 dark:text-white">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-                                </svg>
-                            </a>
+                            <form action="/dashboard/posts/{{ $post->slug }}" method="POST">
+                                @method('delete')
+                                @csrf
+                                <button class="text-gray-800 dark:text-white"
+                                    onclick="return confirm ('are you sure?') ">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+                                    </svg>
+                                </button>
+                            </form>
+
                         </td>
                     </tr>
                 @endforeach
