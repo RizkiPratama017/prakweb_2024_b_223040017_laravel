@@ -26,6 +26,17 @@
                         {{ $post->title }}</h1>
                 </header>
 
+
+                @if ($post->image)
+                    <div style="max-height: 1200px; max-width:400px">
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->category->name }}">
+                    </div>
+                @else
+                    <img src="{{ $photoUrl }}&w=1200&h=400" alt="{{ $post->category->name }}">
+                @endif
+
+
+
                 <div class="post-content">
                     {!! $post->body !!}
                 </div>

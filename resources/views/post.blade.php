@@ -29,6 +29,16 @@
                         class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
                         {{ $post->title }}</h1>
                 </header>
+
+                @if ($post->image)
+                    <div style="max-height: 1200px; max-width:400px">
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->category->name }}">
+                    </div>
+                @else
+                    <img src="{{ $post->getImageUrl() }}" alt="{{ $post->category->name }}">
+                    <!-- Menampilkan gambar dari Unsplash -->
+                @endif
+
                 <div class="post-content">
                     {!! $post->body !!}
                 </div>

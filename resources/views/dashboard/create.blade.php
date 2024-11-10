@@ -4,7 +4,7 @@
     </div>
 
     <div class="flex justify-center md:justify-start">
-        <form class="w-full md:w-1/2" method="POST" action="/dashboard/posts">
+        <form class="w-full md:w-1/2" method="POST" action="/dashboard/posts" enctype="multipart/form-data">
             @csrf
             <div class="mb-5">
                 <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
@@ -47,18 +47,29 @@
                         @endif
                     @endforeach
                 </select>
+            </div>
 
+            <div class="max-w-lg mx-auto mb-5">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Upload
+                    image</label>
+                <input
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                    @error('image') is-invalid @enderror"
+                    aria-describedby="user_avatar_help" id="image" name="image" type="file">
+                @error('image')
+                    <div class="invalid-feedback text-red-700">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
-
-                <div class="mb-5">
-                    <label for="body"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
-                    @error('body')
-                        <p class="text-red-700">{{ $message }}</p>
-                    @enderror
-                    <input id="body" type="hidden" name="body">
-                    <trix-editor input="body"></trix-editor>
-                </div>
+            <div class="mb-5">
+                <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
+                @error('body')
+                    <p class="text-red-700">{{ $message }}</p>
+                @enderror
+                <input id="body" type="hidden" name="body">
+                <trix-editor input="body"></trix-editor>
             </div>
 
             <button type="submit"

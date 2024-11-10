@@ -1,5 +1,5 @@
 <header class="bg-gray-900 text-white flex items-center p-4 shadow">
-    <p class="text-white text-lg font-semibold">Admin {{ auth()->user()->name }}</p>
+    <a href="/" class="text-white text-lg font-semibold">Admin {{ auth()->user()->name }}</a>
     <div class="ml-auto">
         <form action="/logout" method="POST">
             @csrf

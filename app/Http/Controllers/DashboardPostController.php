@@ -6,21 +6,29 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Services\UnsplashService;
 
 class DashboardPostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    protected $unsplashService;
+
+    public function __construct(UnsplashService $unsplashService)
+    {
+        $this->unsplashService = $unsplashService;
+    }
+
+
     public function index()
     {
-
 
         return view('dashboard.posts', [
             'posts' => Post::where('author_id', auth()->user()->id)->get()
         ]);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -37,14 +45,26 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
+
+
+
+
         $validateData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts',
             'category_id' => 'required',
+            'image' => 'image|file|max:1024',
             'body' => 'required'
         ]);
 
+        if ($request->file('image')) {
+            $validateData['image'] = $request->file('image')->store('post-images');
+        }
+
+
         $validateData['author_id'] = auth()->user()->id;
+
+
 
         Post::create($validateData);
 
@@ -56,13 +76,13 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
-
+        $photo = $this->unsplashService->getRandomPhoto($post->category->name);
 
         return view('dashboard.show', [
             'post' => $post,
+            'photoUrl' => $photo['urls']['regular'] ?? 'default-image-url.jpg',
         ]);
     }
-
 
     /**
      * Show the form for editing the specified resource.

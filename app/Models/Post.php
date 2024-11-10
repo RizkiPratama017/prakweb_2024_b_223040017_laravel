@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\UnsplashService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,7 +13,7 @@ class Post extends Model
 {
     use HasFactory, Sluggable;
 
-    protected $fillable = ['title', 'author_id', 'slug', 'body', 'category_id'];
+    protected $fillable = ['title', 'author_id', 'slug', 'image', 'body', 'category_id'];
     protected $with = ['author', 'category'];
 
     public function author(): BelongsTo
@@ -46,5 +47,19 @@ class Post extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function getImageUrl()
+    {
+
+        if ($this->image) {
+            return asset('storage/' . $this->image);
+        }
+
+
+        $unsplashService = new UnsplashService();
+        $photo = $unsplashService->getRandomPhoto($this->category->name);
+
+        return $photo['urls']['regular'] ?? 'default-image-url.jpg';
     }
 }
