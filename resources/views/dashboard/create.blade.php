@@ -52,10 +52,12 @@
             <div class="max-w-lg mx-auto mb-5">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Upload
                     image</label>
+                <img class="img-preview mb-3" src="" alt="">
                 <input
                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
                     @error('image') is-invalid @enderror"
-                    aria-describedby="user_avatar_help" id="image" name="image" type="file">
+                    aria-describedby="user_avatar_help" id="image" name="image" type="file"
+                    onchange="previewImage()">
                 @error('image')
                     <div class="invalid-feedback text-red-700">
                         {{ $message }}
@@ -78,21 +80,4 @@
             </button>
         </form>
     </div>
-
-
-
-    <script>
-        const title = document.querySelector('#title');
-        const slug = document.querySelector('#slug');
-
-        title.addEventListener('change', function() {
-            fetch('/dashboard/posts/create/checkSlug?title=' + title.value)
-                .then(response => response.json())
-                .then(data => slug.value = data.slug)
-        });
-
-        document.addEventListener('trix-file-accept', function(e) {
-            e.preventDefault();
-        });
-    </script>
 </x-dlayout>

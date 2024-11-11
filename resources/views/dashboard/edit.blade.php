@@ -4,7 +4,8 @@
     </div>
 
     <div class="flex justify-center md:justify-start">
-        <form class="w-full md:w-1/2" method="POST" action="/dashboard/posts/{{ $post->slug }}">
+        <form class="w-full md:w-1/2" method="POST" action="/dashboard/posts/{{ $post->slug }}"
+            enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="mb-5">
@@ -48,18 +49,37 @@
                         @endif
                     @endforeach
                 </select>
+            </div>
 
+            <div class="max-w-lg mx-auto mb-5">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Upload
+                    image</label>
 
+                <input type="hidden" name="oldImage" value="{{ $post->image }}">
+                @if ($post->image)
+                    <img class="img-preview mb-3" src="{{ asset('storage/' . $post->image) }}" alt="">
+                @else
+                    <img class="img-preview mb-3" src="" alt="">
+                @endif
+                <input
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                    @error('image') is-invalid @enderror"
+                    aria-describedby="user_avatar_help" id="image" name="image" type="file"
+                    onchange="previewImage()">
+                @error('image')
+                    <div class="invalid-feedback text-red-700">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
-                <div class="mb-5">
-                    <label for="body"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
-                    @error('body')
-                        <p class="text-red-700">{{ $message }}</p>
-                    @enderror
-                    <input id="body" type="hidden" name="body" value="{{ old('body', $post->body) }}">
-                    <trix-editor input="body"></trix-editor>
-                </div>
+            <div class="mb-5">
+                <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
+                @error('body')
+                    <p class="text-red-700">{{ $message }}</p>
+                @enderror
+                <input id="body" type="hidden" name="body" value="{{ old('body', $post->body) }}">
+                <trix-editor input="body"></trix-editor>
             </div>
 
             <button type="submit"
@@ -68,21 +88,4 @@
             </button>
         </form>
     </div>
-
-
-
-    <script>
-        const title = document.querySelector('#title');
-        const slug = document.querySelector('#slug');
-
-        title.addEventListener('change', function() {
-            fetch('/dashboard/posts/create/checkSlug?title=' + title.value)
-                .then(response => response.json())
-                .then(data => slug.value = data.slug)
-        });
-
-        document.addEventListener('trix-file-accept', function(e) {
-            e.preventDefault();
-        });
-    </script>
 </x-dlayout>
