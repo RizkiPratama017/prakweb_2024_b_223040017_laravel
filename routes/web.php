@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
@@ -7,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardPostController;
-
+use App\Http\Middleware\isAdmin;
 
 Route::get('/', function () {
     return view('home', ['title' => 'Halaman Utama']);
@@ -58,3 +59,5 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
 Route::get('/dashboard/posts/create/checkSlug', [DashboardPostController::class, 'checkSlug']);
+
+route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware(isAdmin::class);

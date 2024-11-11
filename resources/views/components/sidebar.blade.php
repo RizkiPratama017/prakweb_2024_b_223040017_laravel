@@ -7,18 +7,33 @@
                 <li>
                     <a href="/dashboard"
                         class="{{ Request::is('dashboard') ? 'text-blue-500' : 'text-gray-700' }} flex items-center hover:text-black font-semibold">
-                        <i class="bi bi-house mr-2"></i> Dashboard
+                        <i class="bi bi-house-door mr-2"></i> Dashboard
                     </a>
                 </li>
 
                 <li>
                     <a href="/dashboard/posts"
                         class="{{ Request::is('dashboard/posts') ? 'text-blue-500' : 'text-gray-700' }} flex items-center hover:text-black font-semibold">
-                        <i class="bi bi-house mr-2"></i> My Post
+                        <i class="bi bi-file-earmark-text mr-2"></i> My Post
                     </a>
                 </li>
-
             </ul>
+
+            @can('admin')
+                <!-- Section title for Administrator -->
+                <div class="mt-6 mb-2 text-gray-600 font-bold text-sm uppercase">
+                    Administrator
+                </div>
+
+                <ul>
+                    <li>
+                        <a href="/dashboard/categories"
+                            class="{{ Request::is('dashboard/categories*') ? 'text-blue-500' : 'text-gray-700' }} flex items-center hover:text-black font-semibold">
+                            <i class="bi bi-tags mr-2"></i> Categories
+                        </a>
+                    </li>
+                </ul>
+            @endcan
         </nav>
     </div>
 
@@ -54,13 +69,13 @@
                 <ul class="space-y-4">
                     <li>
                         <a href="/dashboard" class="flex items-center text-gray-700 hover:text-black font-semibold">
-                            <i class="bi bi-house mr-2"></i> Dashboard
+                            <i class="bi bi-house-door mr-2"></i> Dashboard
                         </a>
                     </li>
                     <li>
                         <a href="/dashboard/posts"
                             class="flex items-center text-gray-700 hover:text-black font-semibold">
-                            <i class="bi bi-file-earmark mr-2"></i> My Posts
+                            <i class="bi bi-file-earmark-text mr-2"></i> My Posts
                         </a>
                     </li>
                 </ul>
